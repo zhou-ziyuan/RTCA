@@ -1,0 +1,64 @@
+# --- Defaults ---
+
+# --- pymarl options ---
+runner: "episode" # Runs 1 env for an episode
+mac: "basic_mac" # Basic controller
+env: "sc2" # Environment name
+env_args: {} # Arguments for the environment
+batch_size_run: 1 # Number of environments to run in parallel
+test_nepisode: 20 # Number of episodes to test for
+test_interval: 2000 # Test after {} timesteps have passed
+test_greedy: True # Use greedy evaluation (if False, will set epsilon floor to 0
+log_interval: 2000 # Log summary of stats after every {} timesteps
+runner_log_interval: 2000 # Log runner stats (not test stats) every {} timesteps
+learner_log_interval: 2000 # Log training stats every {} timesteps
+t_max: 10000 # Stop running after this many timesteps
+use_cuda: True # Use gpu by default unless it isn't available
+buffer_cpu_only: True # If true we won't keep all of the replay buffer in vram
+
+# --- Logging options ---
+use_tensorboard: True # Log results to tensorboard
+save_model: True # Save the models to disk
+save_model_interval: 200000 # Save models after this many timesteps
+checkpoint_path: "" #results/models/vdn_2m_vs_1z_2023-04-30_18-35-20
+checkpoint_path_q_adv: "" # results/q_adv/models/q_adv_3s5z_2023-04-28_10-05-29
+evaluate: False # Evaluate model for test_nepisode episodes and quit (no training)
+load_step: 0 # Load model trained on this many timesteps (0 if choose max possible)
+save_replay: False # Saving the replay of the model loaded from checkpoint_path
+local_results_path: "results/adv_fgsm" # Path for local results
+
+# --- RL hyperparameters ---
+gamma: 0.99
+batch_size: 32 # Number of episodes to train on
+buffer_size: 32 # Size of the replay buffer
+lr: 0.0005 # Learning rate for agents
+critic_lr: 0.0005 # Learning rate for critics
+optim_alpha: 0.99 # RMSProp alpha
+optim_eps: 0.00001 # RMSProp epsilon
+grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
+
+# --- Agent parameters ---
+agent: "rnn" # Default rnn agent
+rnn_hidden_dim: 64 # Size of hidden state for default rnn agent
+obs_agent_id: True # Include the agent's one_hot id in the observation
+obs_last_action: True # Include the agent's last action (one_hot) in the observation
+
+# --- Experiment running params ---
+repeat_id: 1
+label: "default_label"
+
+# --- Adversarial params ---
+Number_attack: 8
+attack_method: "fgsm"
+epsilon_ball: 0.1
+attack_niters: 20 # If use pgd
+verbose: False
+adv_local_results_path: "results/adv_tar/adv/"
+adv_load_step: 0
+adv_checkpoint_path: "" #results/adv_tar/adv/models/qmix_3s6z_0-1_2023-04-29_03-07-12
+adv_batch_size_run: 1
+adv_batch_size: 32
+
+# python src/main.py --config=qmix --env-config=sc2 with env_args.map_name=4m_vs_3m
+# python src/main.py --config=q_adv --env-config=sc2 with env_args.map_name=2s3z
+# python src/main.py --config=vdn --env-config=sc2 with env_args.map_name=6m

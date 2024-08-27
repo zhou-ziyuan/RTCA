@@ -1,0 +1,93 @@
+# --- Defaults ---
+
+# --- pymarl options ---
+runner: "episode" # Runs 1 env for an episode
+mac: "basic_mac" # Basic controller
+env: "pred_prey" # Environment name
+env_args: {} # Arguments for the environment
+batch_size_run: 1 # Number of environments to run in parallel
+test_nepisode: 10 # Number of episodes to test for
+test_interval: 2000 # Test after {} timesteps have passed
+test_greedy: True # Use greedy evaluation (if False, will set epsilon floor to 0
+log_interval: 2000 # Log summary of stats after every {} timesteps
+runner_log_interval: 2000 # Log runner stats (not test stats) every {} timesteps
+learner_log_interval: 2000 # Log training stats every {} timesteps
+t_max: 10000 # Stop running after this many timesteps
+use_cuda: False # Use gpu by default unless it isn't available
+use_buffer_compression: False
+buffer_device: ~
+buffer_algo: ~
+buffer_chunk_size: ~
+
+# --- Logging options ---
+use_tensorboard: True # Log results to tensorboard
+save_model: False # Save the models to disk
+save_model_interval: 100000 # Save models after this many timesteps
+checkpoint_path: "" # Load a checkpoint from this path
+checkpoint_path_q_adv: "" #results/facmac/sc2/q_adv/models/q_adv_smac_25m_2024-05-08_13-58-25   results/q_adv/models/q_adv_3acnn_2023-07-03_13-14-10 results/q_adv/models/q_adv_Humanoid-v2_2023-09-06_02-27-41
+evaluate: False # Evaluate model for test_nepisode episodes and quit (no training)
+load_step: 0 # Load model trained on this many timesteps (0 if choose max possible)
+save_replay: False # Saving the replay of the model loaded from checkpoint_path
+local_results_path: "results/facmac_adv_tar/q_adv" # "results/maddpg/adv_tar/agent" # Path for local results
+
+
+# --- RL hyperparameters ---
+gamma: 0.99
+batch_size: 32 # Number of episodes to train on
+buffer_size: 32 # Size of the replay buffer
+lr: 0.0005 # Learning rate for agents
+critic_lr: 0.0005 # Learning rate for critics
+recurrent_critic: False
+optim_alpha: 0.99 # RMSProp alpha
+optim_eps: 0.00001
+grad_norm_clip: 10 # Reduce magnitude of gradients above this L2 norm
+
+# --- Agent parameters ---
+agent: "rnn" # Default rnn agent
+rnn_hidden_dim: 64 # Size of hidden state for default rnn agent
+obs_agent_id: True # Include the agent's one_hot id in the observation
+obs_last_action: True # Include the agent's last action (one_hot) in the observation
+
+# --- Experiment running params ---
+repeat_id: 1
+label: "default_label"
+run_mode: "sequential"
+n_runners: 1
+continuous_actions: False
+debug: False
+buffer_mode: "transitions"
+n_train: 1
+learn_interval: 100
+testing_on: True
+buffer_cpu_only: True
+runner_scope: episodic
+plot_loss_network: False
+verbose: False
+optimizer: rmsprop
+target_update_mode: hard
+
+
+# --- Adversarial params ---
+Number_attack: 0
+attack_method: "pgd" # "fgsm" "rand_nosie" "adv_de" "adv_tar" "q_adv_de" "adv_q_action"
+attack_target_method : "sgld" # "fgsm" "sgld"
+epsilon_ball: 0.02
+attack_niters: 20 # If use pgd or sgld
+verbose: False
+adv_local_results_path: "results/maddpg/adv_tar/adv/"
+adv_load_step: 0
+adv_checkpoint_path: "" #
+adv_batch_size_run: 1
+adv_batch_size: 32
+
+# 3a 0.02
+# 6a 0.02
+
+# python src/main.py --config=facmac_pp --env-config=particle with env_args.scenario_name=simple_spread checkpoint_path=results/models/facmac_pp_spread3_2023-07-11_07-12-10 evaluate=True test_nepisode=25 seed=240866759
+# simple_spread: results/q_adv/models/q_adv_spread_3a_2023-07-12_03-15-41 python src/main.py --config=q_adv_pp --env-config=particle with env_args.scenario_name=simple_spread checkpoint_path=results/models/facmac_pp_spread3_2023-07-11_07-12-10 evaluate=True test_nepisode=100 seed=240866759
+# pp_3a:results/q_adv/models/q_adv_3acnn_2023-07-03_13-14-10 c
+# pp_6a:results/q_adv/models/q_adv_6acnn1_2023-07-03_20-40-34 python src/main.py --config=q_adv_pp --env-config=particle with env_args.scenario_name=continuous_pred_prey_6a checkpoint_path=results/models/facmac_pp_vdn_6a_2023-06-13_10-43-08 evaluate=True test_nepisode=100 seed=87285708 mixer=vdn
+# Humanoid: results/q_adv/models/q_adv_Humanoid-v2_2023-09-06_02-27-41  python src/main.py --config=q_adv_mamujoco --env-config=mujoco_multi with env_args.scenario_name="Humanoid-v2" env_args.agent_conf="9|8" env_args.agent_obsk=0 checkpoint_path=results/models/facmac_mamujoco_Humanoid-v2_2023-09-03_10-18-41 seed=664740420 evaluate=True test_nepisode=500 epsilon_ball=0.02 use_cuda=True Number_attack=1
+# HumanoidStandup: results/q_adv/models/q_adv_HumanoidStandup-v2_2023-09-06_13-53-59 ccc
+# 4_ANT: results/q_adv/models/q_adv_4-Ant-v2_2023-09-06_14-24-46 python src/main.py --config=facmac_mamujoco --env-config=mujoco_multi with env_args.scenario_name="Ant-v2" env_args.agent_conf="4x2" env_args.agent_obsk=1 seed=723193291 checkpoint_path=results/models/facmac_mamujoco_4-Ant-v2_2023-09-03_18-28-40 evaluate=True test_nepisode=500
+# 25m: python src/main.py --config=facmac_smac --env-config=sc2 with env_args.map_name=25m checkpoint_path=results/facmac/sc2/models/facmac_smac_25m_2024-05-08_00-35-58 evaluate=True test_nepisode=100 seed=834886149 
