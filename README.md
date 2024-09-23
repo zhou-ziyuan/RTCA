@@ -38,7 +38,7 @@ python src/main.py --config=q_adv_mamujoco --env-config=mujoco_multi with env_ar
 ```
 
 ```tex
-@inproceedings{ecai_ZhouL23,
+@inproceedings{ecai_ZhouL23_RTCA,
   author       = {Ziyuan Zhou and
                   Guanjun Liu},
   title        = {Robustness Testing for Multi-Agent Reinforcement Learning: State Perturbations
@@ -56,5 +56,16 @@ python src/main.py --config=q_adv_mamujoco --env-config=mujoco_multi with env_ar
   doi          = {10.3233/FAIA230632}
 }
 ```
+、、、
+@ARTICLE{TSMCA_AMCA,
+  author={Zhou, Ziyuan and Liu, Guanjun and Guo, Weiran and Zhou, MengChu},
+  journal={IEEE Transactions on Systems, Man, and Cybernetics: Systems}, 
+  title={Adversarial Attacks on Multiagent Deep Reinforcement Learning Models in Continuous Action Space}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-14},
+  doi={10.1109/TSMC.2024.3454118}}
+、、、
 
 
