@@ -56,7 +56,7 @@ python src/main.py --config=q_adv_mamujoco --env-config=mujoco_multi with env_ar
   doi          = {10.3233/FAIA230632}
 }
 ```
-、、、
+```tex
 @ARTICLE{TSMCA_AMCA,
   author={Zhou, Ziyuan and Liu, Guanjun and Guo, Weiran and Zhou, MengChu},
   journal={IEEE Transactions on Systems, Man, and Cybernetics: Systems}, 
@@ -66,6 +66,6 @@ python src/main.py --config=q_adv_mamujoco --env-config=mujoco_multi with env_ar
   number={},
   pages={1-14},
   doi={10.1109/TSMC.2024.3454118}}
-、、、
+```
 
 
