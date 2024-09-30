@@ -36,7 +36,8 @@ python src/main.py --config=q_adv --env-config=sc2 with env_args.map_name=2s3z N
 cd Continuous action space
 python src/main.py --config=q_adv_mamujoco --env-config=mujoco_multi with env_args.scenario_name="Ant-v2" env_args.agent_conf="4x2" env_args.agent_obsk=1 attack_method=q_adv_de evaluate=True test_nepisode=500 Number_attack=1 attack_method=q_adv_de attack_target_method=sgld checkpoint_path_q_adv=xxx checkpoint_path=xxx
 ```
-
+## Citation
+If you find our paper or this repository useful for your research or project, we kindly ask you to reference our work using the following BibTeX citation:
 ```tex
 @inproceedings{ecai_ZhouL23_RTCA,
   author       = {Ziyuan Zhou and
