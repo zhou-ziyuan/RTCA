@@ -1,4 +1,4 @@
-These two codes are modified version based on repositories from https://github.com/oxwhirl/pymarl and https://github.com/azure-123/Backdoor-FACMAC, with additional references to the code from https://github.com/Hyperparticle/one-pixel-attack-keras.
+These two codes are modified version based on repositories from https://github.com/oxwhirl/pymarl and https://github.com/oxwhirl/facmac, with additional references to the code from https://github.com/Hyperparticle/one-pixel-attack-keras.
 
 # Run an experiment 
 ## Train models based on clean observations
